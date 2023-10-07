@@ -1,11 +1,9 @@
 package com.utn.utnApiRest.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +12,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Builder
 public class Libro  extends Base{
     @Column(name = "titulo")
     private String titulo;
@@ -25,6 +23,12 @@ public class Libro  extends Base{
     @Column(name = "paginas")
     private int paginas;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
-    private List<Autor> autores;
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<Autor> autores = new ArrayList<>() ;
+
+    public void AddAutores (Autor a1) {
+        autores.add(a1);
+
+    }
 }
