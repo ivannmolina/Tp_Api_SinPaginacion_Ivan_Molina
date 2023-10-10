@@ -1,6 +1,8 @@
 package com.utn.utnApiRest.services;
 
 import com.utn.utnApiRest.entities.Base;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.Locale;
 public interface BaseService<E extends Base, ID extends Serializable> {
     //obtiene una lista de todas las entidades
     public List<E> findAll() throws Exception;
+    public Page<E> findAll(Pageable pageable) throws Exception;
     //obtener persona que tiene dicho Id
     public E findById(ID id)  throws Exception;
     //crea entidad
